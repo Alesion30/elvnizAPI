@@ -1,0 +1,31 @@
+{
+  "name": "node-obniz",
+  "version": "1.0.0",
+  "author": "yuta ohira",
+  "license": "MIT",
+  "scripts": {
+    "dev": "ts-node --files -r tsconfig-paths/register src/main.ts",
+    "build": "tsc -p tsconfig.json && tsc-alias -p tsconfig.json",
+    "start": "node dist/main.js",
+    "lint": "eslint --ext .js,.ts .",
+    "format": "prettier --write \"**/*.{js,ts,json}\""
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "obniz": "^3.14.0"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.11",
+    "@types/node": "^15.0.2",
+    "@typescript-eslint/eslint-plugin": "^4.22.1",
+    "@typescript-eslint/parser": "^4.22.1",
+    "dotenv": "^9.0.0",
+    "eslint": "^7.25.0",
+    "eslint-config-prettier": "^8.3.0",
+    "prettier": "^2.2.1",
+    "ts-node": "^9.1.1",
+    "tsc-alias": "^1.2.10",
+    "tsconfig-paths": "^3.9.0",
+    "typescript": "^4.2.4"
+  }
+}
