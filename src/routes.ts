@@ -1,29 +1,22 @@
 import app from "@/plugin/express";
 import { Request, Response } from "@/typings/express";
-import { sayhello } from "@/functions/sample";
+import { sayhello } from "@/functions/hello";
 import { blecount } from "@/functions/blecount";
 import { display } from "@/helper/display";
 import { getQuery } from "@/helper/query";
 
-// エラーメッセージ
-const errorMessage = "Connection with obniz failed...";
-
 // エンドポイント
 app.get("/", async (req: Request, res: Response) => {
-  // クエリーパラメータから値を取得
+  // クエリパラメータからテキストを取得
   const qname = getQuery(req, "name");
   const name: string = qname ?? "World";
 
   // ディスプレイに出力
-  const { success, data } = await sayhello(name);
-  if (success) {
-    res.send(data);
-  } else {
-    res.status(500).send(errorMessage);
-  }
+  const data = await sayhello(name);
+  res.send(data);
 });
 app.get("/ble", async (req: Request, res: Response) => {
-  // クエリーパラメータから待ち時間を取得
+  // クエリパラメータから待ち時間を取得
   const qwait = getQuery(req, "wait");
   let wait = parseInt(qwait);
   if (isNaN(wait) || wait <= 0) {
@@ -31,13 +24,9 @@ app.get("/ble", async (req: Request, res: Response) => {
   }
 
   // BLE接続可能なデバイス数を取得
-  const { success, data } = await blecount(wait);
-  if (success) {
-    display(`count: ${data}`);
-    res.send(`count: ${data}`);
-  } else {
-    res.status(500).send(errorMessage);
-  }
+  const data = await blecount(wait);
+  display(`count: ${data}`);
+  res.send(`count: ${data}`);
 });
 
 export default app;
