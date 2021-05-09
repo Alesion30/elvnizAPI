@@ -1,24 +1,10 @@
 import app from "@/plugin/express";
-import obniz from "@/plugin/obniz";
 import { Request, Response } from "@/typings/express";
 import { sayhello } from "@/functions/hello";
 import { blecount } from "@/functions/blecount";
 import { display } from "@/helper/display";
 import { getQuery } from "@/helper/query";
 import { getResponse } from "./helper/response";
-
-obniz.onconnect = async function () {
-  await obniz.ble.initWait();
-  obniz.ble.advertisement.setAdvData({
-    serviceUuids: ["1234"],
-  });
-
-  obniz.ble.advertisement.setScanRespData({
-    localName: "obniz BLE",
-  });
-
-  obniz.ble.advertisement.start();
-};
 
 // エンドポイント
 app.get("/", async (req: Request, res: Response) => {
