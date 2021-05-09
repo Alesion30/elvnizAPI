@@ -1,6 +1,7 @@
 import { PORT } from "@/config";
 import app from "@/routes";
 import obniz from "@/plugin/obniz";
+import "@/cron";
 
 const run = async (): Promise<void> => {
   // 接続するまで待機 [タイムアウト3秒]

@@ -9,7 +9,7 @@ export const blecount = async (wait: number = 10): Promise<number> => {
   // 接触確認アプリ「COCOA」 ServiceUUID
   // https://blog.google/documents/58/Contact_Tracing_-_Bluetooth_Specification_v1.1_RYGZbKW.pdf
   const target: BleScanTarget = {
-    uuids: ["FD6F"]
+    uuids: ["FD6F"],
   };
   const setting: BleScanSetting = {
     duration: wait,
@@ -19,10 +19,11 @@ export const blecount = async (wait: number = 10): Promise<number> => {
   // スキャン開始
   const peripherals = await obniz.ble.scan.startAllWait(target, setting);
 
-  peripherals.forEach(peripheral => {
+  peripherals.forEach((peripheral) => {
     console.log(peripheral.rssi);
-  })
-  const count = peripherals.filter(peripheral => peripheral.rssi >= -70).length; // 通信強度を-70dB以上のみカウント
+  });
+  const count = peripherals.filter((peripheral) => peripheral.rssi >= -70)
+    .length; // 通信強度を-70dB以上のみカウント
 
   // スキャン終了
   obniz.ble.scan.endWait();
