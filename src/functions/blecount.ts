@@ -19,11 +19,12 @@ export const blecount = async (wait: number = 10): Promise<number> => {
   // スキャン開始
   const peripherals = await obniz.ble.scan.startAllWait(target, setting);
 
-  peripherals.forEach((peripheral) => {
-    console.log(peripheral.rssi);
-  });
+  // peripherals.forEach((peripheral) => {
+  //   console.log(peripheral.rssi);
+  // });
   const count = peripherals.filter((peripheral) => peripheral.rssi >= -70)
     .length; // 通信強度を-70dB以上のみカウント
+  display(`count: ${count}`);
 
   // スキャン終了
   obniz.ble.scan.endWait();
