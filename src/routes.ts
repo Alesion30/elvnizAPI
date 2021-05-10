@@ -1,7 +1,7 @@
 import app from "@/plugin/express";
 import { Request, Response } from "@/typings/express";
 import { sayhello } from "@/functions/hello";
-import { blecount } from "@/functions/bleCount";
+import { getCocoaDeviceCount } from "@/functions/ble";
 import { getQuery } from "@/helper/query";
 import { getResponse } from "./helper/response";
 
@@ -26,7 +26,7 @@ app.get("/ble", async (req: Request, res: Response) => {
   }
 
   // BLE接続可能なデバイス数を取得
-  const data = await blecount(wait);
+  const data = await getCocoaDeviceCount(wait);
 
   const responseData = getResponse(data);
   return res.status(responseData.status).json(responseData);
