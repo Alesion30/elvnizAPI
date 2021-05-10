@@ -2,7 +2,9 @@ import { display } from "@/helper/display";
 import obniz from "@/plugin/obniz";
 import { BleScanTarget, BleScanSetting } from "@/typings/obniz";
 
-export const getCocoaDeviceCount = async (wait: number = 10): Promise<number> => {
+export const getCocoaDeviceCount = async (
+  wait: number = 10
+): Promise<number> => {
   await obniz.ble.initWait();
   console.log(`Please wait ${wait} seconds.`);
   // display(`Please wait ${wait} seconds.`);
@@ -22,7 +24,7 @@ export const getCocoaDeviceCount = async (wait: number = 10): Promise<number> =>
 
   // 通信強度を取得
   const rssiList = peripherals.map((peripheral) => peripheral.rssi + 100);
-  rssiList.sort((a, b) => a < b ? 1 : -1);
+  rssiList.sort((a, b) => (a < b ? 1 : -1));
 
   // 通信強度を-70dB以上のみカウント
   const count = rssiList.filter((rssi) => rssi >= 30).length;
