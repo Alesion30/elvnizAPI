@@ -26,7 +26,7 @@ export const getCocoaDeviceCount = async (
   const rssiList = peripherals.map((peripheral) => peripheral.rssi + 100);
   rssiList.sort((a, b) => (a < b ? 1 : -1));
 
-  // 通信強度を-70dB以上のみカウント
+  // 通信強度-70dB以上のみカウント
   const count = rssiList.filter((rssi) => rssi >= 30).length;
 
   // カウントと通信強度をディスプレイに表示

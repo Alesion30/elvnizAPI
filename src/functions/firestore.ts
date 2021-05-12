@@ -17,6 +17,10 @@ export const resetElevatorCount = async () => {
 export const resetAllFloorsState = async () => {
   const querySnapshot = await floorsCollection.get();
   querySnapshot.forEach(async (doc) => {
-    await floorsCollection.doc(doc.id).set({ congestion: 0 }, { merge: true });
+    const data = doc.data();
+    const congestion = parseInt(data["congestion"]);
+    if (congestion !== 0) {
+      await floorsCollection.doc(doc.id).set({ congestion: 0 }, { merge: true });
+    }
   });
 };

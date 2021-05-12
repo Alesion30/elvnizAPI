@@ -10,7 +10,7 @@ import {
 let beforeCount = -1;
 
 // 10秒おきにBLEスキャンを実行
-cron.schedule("*/10 * * * * *", async () => {
+cron.schedule("*/10 * 7-23 * * 1-6", async () => {
   // COCOAインストール数を取得
   const count = await getCocoaDeviceCount(2);
 
